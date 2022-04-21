@@ -8,7 +8,7 @@
 
 本项目文件输出格式采用 PPM格式文件 
 
-![img](My_Ray_Tracing.assets\v2-d23bb56acdadb81f85b89d8fc74f48e1_720w-1626574163111.jpg)
+![v2-d23bb56acdadb81f85b89d8fc74f48e1_720w-1626574163111](README.assets/v2-d23bb56acdadb81f85b89d8fc74f48e1_720w-1626574163111.jpg)
 
 ```cpp
 #ifndef COLOR_H
@@ -203,7 +203,7 @@ using color = vec3;    // RGB color
 
 所有的光线追踪器都有个一个ray类, 我们假定光线的公式为$\mathbf{p}(t) = \mathbf{a} + t \vec{\mathbf{b}}$。这里的$p$是三维射线上的一个点。$a$是射线的原点, $\vec{\mathbf{b}}$是射线的方向。类中的变量$t$是一个实数(代码中为double类型)。$p(t)$接受任意的$t$做为变量, 返回射线上的对应点。如果允许$t$取负值你可以得到整条直线。对于一个正数$t$, 你只能得到原点前部分$a$, 这常常被称为半条直线, 或者说射线。
 
-![img](My_Ray_Tracing.assets\v2-0a13240fad9e360645339165054c4e62_720w-1626574203575.jpg)
+![img](README.assets/v2-0a13240fad9e360645339165054c4e62_720w-1626574203575.jpg)
 
 ```cpp
 #ifndef RAY_H
@@ -251,19 +251,19 @@ public:
 
 原点从图像的左下角开始沿着x y方向做增量直至遍历全图。
 
-![Figure 3:** Camera geometry](My_Ray_Tracing.assets\fig-1.03-cam-geom.jpg)
+![Figure 3:** Camera geometry](README.assets/fig-1.03-cam-geom.jpg)
 
 俯仰角：`fov` (field of view)	 $\theta$为俯仰角	此时$h = \tan(\frac{\theta}{2})$
 
-![*Camera viewing geometry*](My_Ray_Tracing.assets\v2-d8f93c297ec72b9e072535b4f6dcb9c8_b.jpg)
+![*Camera viewing geometry*](README.assets/v2-d8f93c297ec72b9e072535b4f6dcb9c8_b.jpg)
 
 `lookfrom` & `lookat`：摄像机所在的这个位置叫做 `lookfrom`, 我们看向的点叫做`lookat`
 
-<img src="My_Ray_Tracing.assets\v2-aade90f2e3cab80e0d37eb824e87d602_b.jpg" alt="*Camera view direction*" style="zoom:67%;" />
+<img src="README.assets/v2-aade90f2e3cab80e0d37eb824e87d602_b.jpg" alt="*Camera view direction*" style="zoom:67%;" />
 
 `vup`：up vector
 
-![img](My_Ray_Tracing.assets\v2-c981ba8338f9688cc36c7f0e4a8861eb_b.jpg)
+![img](README.assets/v2-c981ba8338f9688cc36c7f0e4a8861eb_b.jpg)
 
 u,v,w三个向量来描述摄像机的旋向，vup, v, w处于同一平面内。和先前我们的摄像机面对着-Z方向一样, 修改后的任意视角摄像机面对着
 
@@ -277,11 +277,11 @@ u,v,w三个向量来描述摄像机的旋向，vup, v, w处于同一平面内。
 
 在现实世界中的相机中, 物体在哪里被聚焦是由透镜距离成像平面与聚焦平面这两个平面的距离所决定的。当你改变对焦设置时, 相机中的这个透镜位置就会发生改变(你手机上的摄像头也是这个原理, 只不过透镜不动, 改成了成像传感器动)。快门光圈(aperture)是一个孔, 它控制这块透镜应该多大比较好。如果你需要更多的光线, 你的这个快门光圈就大一点, 景深也会随之加大。对于一个虚拟的摄像机来说, 我们只需要一个传感器就够了。所以我们只需要传入快门光圈的大小就行【即透镜大小】。
 
-![img](My_Ray_Tracing.assets\v2-08cf2fde8d40da8c84f80f9fec833a0e_b.jpg)
+![img](README.assets/v2-08cf2fde8d40da8c84f80f9fec833a0e_b.jpg)
 
 我们只要从一个虚拟的透镜范围中发射光线到我们的摄像机平面就能模拟了,这个透镜与平面的距离成为焦距(focus_dist)
 
-![img](My_Ray_Tracing.assets\v2-5d7653d4521c1fff2fde0d4195a0caaa_b.jpg)
+![img](README.assets/v2-5d7653d4521c1fff2fde0d4195a0caaa_b.jpg)
 
 之前我们所有的光线都是从lookfrom发出的, 但现在加入了散焦模糊, **所有光线都从内部的一个虚拟透镜**发出, 经过lookfrom点, 这个透镜的半径越大, 图像就越模糊。你可以认为之前的摄像机, 这个半径为0。
 
@@ -381,7 +381,7 @@ t^2 \vec{\mathbf{b}}\cdot\vec{\mathbf{b}} + 2t \vec{\mathbf{b}} \cdot \vec{(\mat
 $$
 使用求根公式判断解的个数：**0个解 不相交， 1个解 相切（有一个交点），2个解 相交 （有两个交点）**
 
-![img](My_Ray_Tracing.assets\v2-5a3fbd572f05c511bc2cdf7fcd3df55a_720w.jpg)
+![img](README.assets/v2-5a3fbd572f05c511bc2cdf7fcd3df55a_720w.jpg)
 
 ```cpp
 #ifndef SPHERE_H
@@ -465,7 +465,7 @@ bool sphere::bounding_box(double time0, double time1, aabb& output_box) const {
 
 首先将一个矩形放在xy平面, 通常我们使用一个z值来定义这样的平面。举例来说, $z=k$。一个轴对齐的矩形是由 $x=x_0$,$x=x_1$,$y=y_0$以及$y=y_1$这四条直线构成的。
 
-<img src="My_Ray_Tracing.assets\fig-2.05-ray-rect.jpg" alt="*Ray-rectangle intersection*" style="zoom:67%;" />
+<img src="README.assets/fig-2.05-ray-rect.jpg" alt="*Ray-rectangle intersection*" style="zoom:67%;" />
 
 为了判断光线是否与这样的矩形相交, 我们先来判断射线击中平面上的哪个点。回想一下射线方程$\mathbf{P}(t) = \mathbf{A} + t \mathbf{b}$,, 其中射线的z值又由平面$P_z(t) = A_z + t b_z$决定。合并整理我们将获得当$z=k$时t的值：
 $$
@@ -671,7 +671,7 @@ bool box::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
 
 现在我们有了这两个长方体, 为了让它看上去更加接近**正宗**的Cornell Box, 我们还需要让他旋转一下。在光线追踪中, 我们时常使用**实例(instance)**来完成这个工作。实例是一种经过旋转过或者平移等操作的几何图元。在光线追踪中, 这其实很简单。我们并不需要去移动任何东西。相对的, 我们只需将射线。举例来说, 想象一个**平移**操作, 我们可以将位于原点的粉红色盒子所有的组成部分的的x值+2, 或者就把盒子放在那里, 然后在hit函数中, **相对的将射线的原点-2**。(这也是我们在ray tracing中惯用的做法)*【译注: 射线原点-2计算出hit record后, 得到是左边盒子, 最后还要将计算结果+2, 才能获得正确的射入点(右边盒子)】*
 
-![*Ray-box intersection with moved ray vs box*](My_Ray_Tracing.assets\fig-2.06-ray-box.jpg)
+![*Ray-box intersection with moved ray vs box*](README.assets/fig-2.06-ray-box.jpg)
 
 你把刚刚的这个操作当成是平移还是坐标系的转换都行, 随你的喜好。移动hittable类的translate的代码如下:
 
@@ -718,7 +718,7 @@ bool translate::bounding_box(double time0, double time1, aabb& output_box) const
 
 旋转就没有那么容易理解或列出算式了。一个常用的图像技巧是将所有的旋转都当成是绕xyz轴旋转。首先, 让我们绕z轴旋转。这样只会改变xy而不会改变z值。
 
-<img src="My_Ray_Tracing.assets\fig-2.07-rot-z.jpg" alt="*Rotation about the Z axis*" style="zoom:67%;" />
+<img src="README.assets/fig-2.07-rot-z.jpg" alt="*Rotation about the Z axis*" style="zoom:67%;" />
 
 这里包含了一些三角几何. 我这里就不展开了。你要知道这其实很简单, 并不需要太多的几何知识, 你能在任何一本图形学的教材或者课堂笔记中找到它。绕z轴逆时针旋转的公式如下:
 $$
@@ -853,7 +853,7 @@ bool rotate_y::hit(const ray& r, double t_min, double t_max, hit_record& rec) co
 
 采取的策略是：法向量总是与射线方向相反, 即射线从外部射向球面, 法向量朝外, 射线从内部射向球面, 法向量向着球心。
 
-<img src="My_Ray_Tracing.assets\fig-1.06-normal-sides.jpg" alt="*Possible directions for sphere surface-normal geometry*" style="zoom:67%;" />
+<img src="README.assets/fig-1.06-normal-sides.jpg" alt="*Possible directions for sphere surface-normal geometry*" style="zoom:67%;" />
 
 ```cpp
 #ifndef HITTABLE_H
@@ -962,7 +962,7 @@ bool hittable_list::bounding_box(double time0, double time1, aabb& output_box) c
 
 **漫反射材质不仅会接受其周围环境的光线, 还会在散射时使光线变成自己本身的颜色。**光线射入漫反射材质后, 其反射方向是随机的。所以如果我们为下面这两个漫发射的球射入三条光线, 光线都会有不同的反射角度:
 
-![img](My_Ray_Tracing.assets\v2-f61ad9d024071668f27db1fc248abcf5_b.jpg)
+![img](README.assets/v2-f61ad9d024071668f27db1fc248abcf5_b.jpg)
 
 大部分的光线都会被吸收, 而不是被反射。表面越暗, 吸收率就越高。算法使得入射光线生成随机的反射方向, 就能让其看上去像一个粗糙不平的漫反射材质。这里我们采用最简单的算法就能得到一个理想的漫反射表面：
 
@@ -970,7 +970,7 @@ bool hittable_list::bounding_box(double time0, double time1, aabb& output_box) c
 
 假设有两个单位球相切于点p, 这两个球体的球心为 $(p+\vec{N})$和$(p-\vec{N})$，$\vec{N}$是球体表面的法向量。球心为$(p-\vec{N})$的那个球在表面的内部,球心为 $(p+\vec{N})$的球在表面的外部。选择和光线原点位于表面同一侧的那个单位球, 并从**球内随机选取一点$s$** ，向量$(s-p)$就是我们要求的反射光线的方向:
 
-<img src="My_Ray_Tracing.assets\fig-1.09-rand-vec.jpg" alt="*Generating a random diffuse bounce ray*" style="zoom: 50%;" />
+<img src="README.assets/fig-1.09-rand-vec.jpg" alt="*Generating a random diffuse bounce ray*" style="zoom: 50%;" />
 
 **那如何生成球体内的随机点呢？**
 
@@ -1029,7 +1029,7 @@ vec3 ray_color(const ray& r, const hittable& world, int depth) {
 
 我们会得到:
 
-![*First render of a diffuse sphere*](My_Ray_Tracing.assets\img-1.07-first-diffuse.png)
+![*First render of a diffuse sphere*](README.assets/img-1.07-first-diffuse.png)
 
 **使用Gamma矫正获得正确的颜色**
 
@@ -1037,7 +1037,7 @@ vec3 ray_color(const ray& r, const hittable& world, int depth) {
 
 好了, 现在看上去更灰了, 如我们所愿:
 
-![*Diffuse sphere, with gamma correction*](My_Ray_Tracing.assets\img-1.08-gamma-correct.png)
+![*Diffuse sphere, with gamma correction*](README.assets/img-1.08-gamma-correct.png)
 
 **Fixing Shadow Acne**
 
@@ -1053,7 +1053,7 @@ if (world.hit(r, 0.001, infinity, rec)) {
 
 然而, 事实上的**lambertian**的分布律并不是这样的, 它的系数是$\cos (\phi)$。真正的**lambertian**散射后的光线在法线附近分布的概率会更高, 但是分布会更加均衡。这是因为我们选取的是**单位球面上**的点。我们可以通过在单位球内选取一个随机点, 然后将其单位化来获得该点。
 
-![*The random_unit_vector() function*](My_Ray_Tracing.assets\fig-1.10-rand-unitvec.png)
+![*The random_unit_vector() function*](README.assets/fig-1.10-rand-unitvec.png)
 
 ```cpp
 inline vec3 random_in_unit_sphere() {
@@ -1066,7 +1066,7 @@ vec3 random_unit_vector() {
 
 我们会得到这样的图片, 和之前很相像:
 
-![ *Correct rendering of Lambertian spheres*](My_Ray_Tracing.assets\img-1.09-correct-lambertian.png)
+![ *Correct rendering of Lambertian spheres*](README.assets/img-1.09-correct-lambertian.png)
 
 1.阴影部分少了         2.大球和小球都变亮了
 
@@ -1227,7 +1227,7 @@ class lambertian : public material {
 
 对于光滑的金属材质来说, 光线是不会像漫反射那样随机散射的, 而是产生反射。
 
-![*Ray reflection*](My_Ray_Tracing.assets\fig-1.11-reflection.jpg)
+![*Ray reflection*](README.assets/fig-1.11-reflection.jpg)
 
 反射方向的向量为$\mathbf{\vec{V}} + 2\mathbf{\vec{B}}$，其中我们规定向量$\vec{N}$是单位向量, 但$\vec{V}$不一定是。向量$\vec{B}$的长度应为$\vec{V}·\vec{N}$，因为向量$\vec{V}$与向量$\vec{N}$的方向相反, 这里我们需要再加上一个负号, 于是有:
 
@@ -1347,13 +1347,13 @@ int main() {
 
 我们就能得到这样的图片:
 
-![*Shiny metal*](My_Ray_Tracing.assets\img-1.11-metal-shiny.png)
+![*Shiny metal*](README.assets/img-1.11-metal-shiny.png)
 
 #### **模糊性反射**
 
 我们还可以给反射方向加入一点点随机性, 只要在算出反射向量后, 在其终点为球心的小球内随机选取一个点作为最终的终点:
 
-![*Generating fuzzed reflection rays*](My_Ray_Tracing.assets\fig-1.12-reflect-fuzzy.jpg)
+![*Generating fuzzed reflection rays*](README.assets/fig-1.12-reflect-fuzzy.jpg)
 
 这个球越大, 金属看上去就更加模糊。所以我们这里引入一个变量来表示模糊的程度(fuzziness)(所以当fuzz=0时不会产生模糊)。如果fuzz, 也就是随机球的半径很大, 光线可能会散射到物体内部去。这时候我们可以认为物体吸收了光线。
 
@@ -1378,7 +1378,7 @@ class metal : public material {
 
 我们可以将模糊值设置为0.3和1.0, 图片会变成这样:
 
-![*Fuzzed metal*](My_Ray_Tracing.assets\img-1.12-metal-fuzz.png)
+![*Fuzzed metal*](README.assets/img-1.12-metal-fuzz.png)
 
 ### 电解质[绝缘体]
 
@@ -1394,7 +1394,7 @@ $$
 $$
 $\theta$和$\theta'$是入射光线与折射光线与法线的夹角，$\eta$和$\eta'$是介质的折射率(规定空气为1.0, 玻璃为1.3-1.7,钻石为2.4)
 
-![*Ray refraction*](My_Ray_Tracing.assets\v2-4f08d1085c6bc318a23e135512b6def0_b.jpg)
+![*Ray refraction*](README.assets/v2-4f08d1085c6bc318a23e135512b6def0_b.jpg)
 
 为了解出折射光线的方向, 我们需要解出$\sin\theta'$:
 $$
@@ -1465,7 +1465,7 @@ class dielectric : public material {
 };
 ```
 
-![img](My_Ray_Tracing.assets\img-1.14-glass-always-refract.png)
+![img](README.assets/img-1.14-glass-always-refract.png)
 
 当光线从**高折射率**的介质射入**低折射率**的介质时，对于Snell方程是没有实解的。
 
@@ -1531,7 +1531,7 @@ auto material_right  = make_shared<metal>(color(0.8, 0.6, 0.2), 0.0);
 
 我们会得到:
 
-![*Glass sphere that sometimes refracts*](My_Ray_Tracing.assets\img-1.15-glass-sometimes-refract.png)
+![*Glass sphere that sometimes refracts*](README.assets/img-1.15-glass-sometimes-refract.png)
 
 #### **Schlick Approximation**
 
@@ -1597,7 +1597,7 @@ world.add(make_shared<sphere>(point3(-1.0,    0.0, -1.0),  -0.4, material_left))
 world.add(make_shared<sphere>(point3( 1.0,    0.0, -1.0),   0.5, material_right));
 ```
 
-![*A hollow glass sphere*](My_Ray_Tracing.assets\img-1.16-glass-hollow.png)
+![*A hollow glass sphere*](README.assets/img-1.16-glass-hollow.png)
 
 ### 发光材质
 
@@ -1703,7 +1703,7 @@ else
 
 为了做到每次光线求交都是一个亚线性的查找, 我们需要用包围盒构建出**层级(hierarchical)**。举个例子, 如果我们把一堆物体分成两队, 红队和蓝队, 并使用方方正正的包围盒来包围他们, 你将看到如下场景:
 
-<img src="My_Ray_Tracing.assets\fig-2.01-bvol-hierarchy.jpg" alt="*Bounding volume hierarchy*" style="zoom: 67%;" />
+<img src="README.assets/fig-2.01-bvol-hierarchy.jpg" alt="*Bounding volume hierarchy*" style="zoom: 67%;" />
 
 注意蓝盒子和红盒子现在都在紫盒子里面, 他们允许重合, 并且无序。
 
@@ -1724,11 +1724,11 @@ return false
 
 显然一个n维的AABB盒是由n个平行线所截的区间的重叠拼出来的区域我们管这个叫"slab"。一个区间就是两个端点间的距离。比如$x$ in $(3,5)$。在二维的情况下, 两段区间重叠的部分就是一个二维的AABB(一个矩形)
 
-<img src="My_Ray_Tracing.assets\fig-2.02-2d-aabb.jpg" alt="*2D axis-aligned bounding box*" style="zoom:80%;" />
+<img src="README.assets/fig-2.02-2d-aabb.jpg" alt="*2D axis-aligned bounding box*" style="zoom:80%;" />
 
 对于检测射线是否射入一段区间来说, 我们首先要看看射线有没有射入这个区间的边界。还是拿二维来举例子, 这是光线变量t0, t1。(在光线和目标平面平行的情况下, 因为并没有交点, 这两个变量将未定义)
 
-<img src="My_Ray_Tracing.assets\fig-2.03-ray-slab.jpg" alt="*Ray-slab intersection*" style="zoom:80%;" />
+<img src="README.assets/fig-2.03-ray-slab.jpg" alt="*Ray-slab intersection*" style="zoom:80%;" />
 
 **计算射线与平面是否相交**
 
@@ -1746,7 +1746,7 @@ t_1 = \frac{x_1 - A_x}{b_x}
 $$
 求不同维度的求解结果$t_0$和$t_1$的重叠区间，即为最终的穿过区间。(若不同维度无重叠区间，则表明光线没有穿过这个AABB包围盒)
 
-<img src="My_Ray_Tracing.assets\fig-2.04-ray-slab-interval.jpg" alt="*Ray-slab* tt*-interval overlap*" style="zoom:67%;" />
+<img src="README.assets/fig-2.04-ray-slab-interval.jpg" alt="*Ray-slab* tt*-interval overlap*" style="zoom:67%;" />
 
 **overlap**求最终的重叠区间
 
@@ -2252,7 +2252,7 @@ private:
 
 > Tips：这里的射线数称为SPP, 发射一条射线为1SPP, 发射n条射线为nSpp
 
-![*Pixel samples*](My_Ray_Tracing.assets\v2-e54c77c97131c90f04a27e5a5de7ec55_b.jpg)
+![*Pixel samples*](README.assets/v2-e54c77c97131c90f04a27e5a5de7ec55_b.jpg)
 
 ```cpp
 #include "camera.h"
@@ -2302,9 +2302,9 @@ int main() {
 
 ​																								反走样前   与  反走样后对比
 
-<img src="My_Ray_Tracing.assets\img-1.06-antialias-before-after.png" alt="*Before and after antialiasing*" style="zoom:300%;" />
+<img src="README.assets/img-1.06-antialias-before-after.png" alt="*Before and after antialiasing*" style="zoom:300%;" />
 
 ## Cornell Box
 
-![*Standard Cornell box scene*](My_Ray_Tracing.assets\img-2.20-cornell-standard.png)
+![*Standard Cornell box scene*](README.assets/img-2.20-cornell-standard.png)
 
