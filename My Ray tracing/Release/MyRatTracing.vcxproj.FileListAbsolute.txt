@@ -1,2 +1,0 @@
-E:\Ray tracing in one weekend\MyRatTracing\Release\MyRatTracing.exe
-C:\Users\60319\Desktop\My Ray Tracing\Ray tracing next week\Release\MyRatTracing.exe
